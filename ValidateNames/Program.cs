@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace ValidateNames
 {
@@ -21,116 +22,43 @@ namespace ValidateNames
                 {
                     Console.WriteLine("Nombre Inválido");
                     isValid = true;
-
                 }
             } while (isValid);
         }
 
         public static bool IsValidName(string name)
         {
+            // We divide the name into three terms separated by spaces
+            string[] terms = name.Split(' ');
 
-            // Separa el nombre en términos
-            string[] terminos = name.Split(' ');
+            // If there are not two or three terms, the name is invalid
+            if (terms.Length != 2 && terms.Length != 3) return false;
 
-            // Verifica que haya solo dos o tres términos
-            if (terminos.Length != 2 && terminos.Length != 3)
+            // We check if the first term is an initial
+            bool isFirstTermInitial = Regex.IsMatch(terms[0], @"^[A-Z]\.$");
+
+            // If the first term is not an initial, it must be a complete word
+            if (!isFirstTermInitial && !Regex.IsMatch(terms[0], @"^[A-Z][a-z]+$")) return false;
+
+            if (terms.Length == 2)
             {
-                return false;
+                // If the first term is an initial, the second is not an initial
+                if (isFirstTermInitial && !Regex.IsMatch(terms[1], @"^[A-Z]\.$|^[A-Z][a-z]+$")) return false;
+
+                // If the first term is not an initial, the second must be a whole word
+                if (!isFirstTermInitial && !Regex.IsMatch(terms[1], @"^[A-Z][a-z]+$")) return false;
             }
 
-            // Verifica que el apellido empiece con mayúscula
-            if (!char.IsUpper(terminos[terminos.Length - 1][0]))
+            if (terms.Length == 3)
             {
-                return false;
+                // If the first is an initial, the second must be an initial
+                if (isFirstTermInitial && !Regex.IsMatch(terms[1], @"^[A-Z]\.$")) return false;
+
+                // The third term must be a complete word
+                if (!Regex.IsMatch(terms[2], @"^[A-Z][a-z]+$")) return false;
             }
 
-            // Verifica que el primer término sea una inicial o una palabra completa
-            if (terminos[0].Length == 2)
-            {
-                // Verifica que el primer término sea una inicial con punto
-                if (!terminos[0].EndsWith("."))
-                {
-                    return false;
-                }
-
-                // Verifica que la inicial esté en mayúscula
-                if (!char.IsUpper(terminos[0][0]))
-                {
-                    return false;
-                }
-
-                // Verifica que que haya 3 términos y  mayúscula con punto
-                if (terminos.Length == 3)
-                {
-                    //Verifica que el segundo término sea una inicial
-                    if (terminos[1].Length != 2)
-                    {
-                        return false;
-                    }
-
-                    if (!terminos[1].EndsWith("."))
-                    {
-                        return false;
-                    }
-
-                    if (!char.IsUpper(terminos[1][0]))
-                    {
-                        return false;
-                    }
-                }
-
-            }
-            else
-            {
-                // Verifica que el primer término sea una palabra completa
-                if (terminos[0].Length < 2)
-                {
-                    return false;
-                }
-
-                // Verifica que la palabra completa empiece en mayúscula
-                if (!char.IsUpper(terminos[0][0]))
-                {
-                    return false;
-                }
-
-                // Verifica que el primer término tenga un punto
-                if (terminos[0].EndsWith("."))
-                {
-                    return false;
-                }
-
-            }
-
-            // Verifica que el segundo término sea una inicial o una palabra completa
-            if (terminos[1].Length == 1)
-            {
-                // Verifica que el segundo término sea una inicial con punto
-                if (!terminos[1].EndsWith("."))
-                {
-                    return false;
-                }
-
-                // Verifica que la inicial esté en mayúscula
-                if (!char.IsUpper(terminos[1][0]))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                // Verifica que el segundo término sea una palabra completa
-                if (terminos[1].Length < 2)
-                {
-                    return false;
-                }
-
-                // Verifica que la palabra completa empiece en mayúscula
-                if (!char.IsUpper(terminos[1][0]))
-                {
-                    return false;
-                }
-            }
+            // Success
             return true;
         }
     }
