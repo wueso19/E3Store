@@ -2,58 +2,40 @@
 
 namespace SimplifyFraction
 {
-    class Fraction
+    public class Fraction
     {
-        private int numerator;
-        private int denominator;
-
-        public int Numerator { get => numerator; set => numerator = value; }
-        public int Denominator { get => denominator; set => denominator = value; }
+        public int Numerator { get; set; }
+        public int Denominator { get; set; }
 
         public Fraction(int numerator, int denominator)
         {
-            this.numerator = numerator;
-            this.denominator = denominator;
+            Numerator = numerator;
+            Denominator = denominator;
         }
 
         public override string ToString()
         {
-            string result;
-
-
-            if (this.denominator != 0)
-            {
-                result = this.denominator == 1 ? this.numerator.ToString() : this.numerator + "/" + this.denominator;
-
-            }
-            else
-            {
-                result = "¡No se permite la división por 0!";
-            }
-
-            return result;
+            return Denominator == 1 ? Numerator.ToString() : $"{Numerator}/{Denominator}";
         }
 
         public Fraction Simplify()
         {
-            int mcd = FindGCD(this.numerator, this.denominator);
-            if (mcd != this.numerator)
+            if (Denominator == 0)
             {
-                this.numerator /= mcd;
-                this.denominator /= mcd;
+                throw new DivideByZeroException("No se puede simplificar una fracción con denominador cero");
             }
+
+            int gcd = FindGCD(Numerator, Denominator);
+            Numerator /= gcd;
+            Denominator /= gcd;
 
             return this;
         }
 
-        private static int FindGCD(int a, int b)
+        private static int FindGCD(int numerator, int denominator)
         {
-            if (b == 0)
-            {
-                return Math.Abs(a);
-            }
-
-            return FindGCD(b, a % b);
+            // Euclidean algorithm
+            return denominator == 0 ? numerator : FindGCD(denominator, numerator % denominator);
         }
     }
 }
