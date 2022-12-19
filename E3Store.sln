@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33130.400
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplifyFraction", "SimplifyFraction\SimplifyFraction.csproj", "{89996FE5-B353-4E0F-92B5-8A0B8C1FEF1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplifyFraction", "SimplifyFraction\SimplifyFraction.csproj", "{89996FE5-B353-4E0F-92B5-8A0B8C1FEF1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidateNames", "ValidateNames\ValidateNames.csproj", "{F2468DE8-F20C-401D-87EF-00578AE33DE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidateNames", "ValidateNames\ValidateNames.csproj", "{F2468DE8-F20C-401D-87EF-00578AE33DE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUnit", "TestUnit\TestUnit.csproj", "{C1EECE75-634C-4897-BE94-8061390DD441}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F2468DE8-F20C-401D-87EF-00578AE33DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2468DE8-F20C-401D-87EF-00578AE33DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2468DE8-F20C-401D-87EF-00578AE33DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1EECE75-634C-4897-BE94-8061390DD441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1EECE75-634C-4897-BE94-8061390DD441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1EECE75-634C-4897-BE94-8061390DD441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1EECE75-634C-4897-BE94-8061390DD441}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
